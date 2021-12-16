@@ -12,8 +12,6 @@ import taxi.service.CarService;
 import taxi.service.DriverService;
 
 public class AddDriverToCarController extends HttpServlet {
-    private static final String CAR_ID = "car_id";
-    private static final String DRIVER_ID = "driver_id";
     private static final Injector injector = Injector.getInstance("taxi");
     private final CarService carService = (CarService) injector
             .getInstance(CarService.class);
@@ -29,8 +27,8 @@ public class AddDriverToCarController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
-        long driverId = Long.parseLong(req.getParameter(DRIVER_ID));
-        long carId = Long.parseLong(req.getParameter(CAR_ID));
+        long driverId = Long.parseLong(req.getParameter("driver_id"));
+        long carId = Long.parseLong(req.getParameter("car_id"));
         Driver driver = driverService.get(driverId);
         Car car = carService.get(carId);
         carService.addDriverToCar(driver, car);
